@@ -5,13 +5,13 @@ import RequestScreen from '../screens/RequestScreen';
 
 
 export const AppTabNavigator = createBottomTabNavigator({
-    BookRequestScreen: {
-        screen: BookRequestScreen,
+    RequestScreen: {
+        screen: RequestScreen,
         navigationOptions: {
             tabBarLabel: 'Request items.'
         }
     },
-    BookDonateScreen : {
+    DonateScreen : {
         screen: AppStackNavigator,
         navigationOptions:{
             tabBarLabel: 'Donate items.'

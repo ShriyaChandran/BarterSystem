@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity,TextInput,KeyboardAvoidingView} from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
+import {MyHeader} from '../components/MyHeader';
 
 export default class  DonteScreen extends React.Component{
     constructor(){
