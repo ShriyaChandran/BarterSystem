@@ -2,6 +2,7 @@ import * as React from 'react';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import DonateScreen from '../screens/DonateScreen';
 import RequestScreen from '../screens/RequestScreen';
+import SignupLoginScreen from '../screens/SignupLoginScreen';
 
 
 export const AppTabNavigator = createBottomTabNavigator({
@@ -12,7 +13,7 @@ export const AppTabNavigator = createBottomTabNavigator({
         }
     },
     DonateScreen : {
-        screen: AppStackNavigator,
+        screen: DonateScreen,
         navigationOptions:{
             tabBarLabel: 'Donate items.'
         }
@@ -20,9 +21,3 @@ export const AppTabNavigator = createBottomTabNavigator({
     }
 });
 
-const switchNavigator = createSwitchNavigator({
-    SignupLoginScreen: {screen:SignupLoginScreen},
-    TabNavigator:TabNavigator
-  })
-  
-  const AppContainer = createAppContainer(switchContainer);

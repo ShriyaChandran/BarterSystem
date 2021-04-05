@@ -27,7 +27,7 @@ export default class  DonateScreen extends Component{
         return (
           <ListItem
             key={i}
-            title={item.book_name}
+            title={item.item_name}  
             subtitle={item.reason_to_request}
             titleStyle={{ color: 'black', fontWeight: 'bold' }}
             rightElement={
