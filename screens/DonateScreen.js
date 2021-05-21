@@ -41,7 +41,11 @@ export default class DonateScreen extends Component{
         <ListItem.Subtitle>{item.reason_to_request}</ListItem.Subtitle>
         
         
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button}
+            onPress={()=>{
+              this.props.navigation.navigate("ReceiverDetails",{"details":item})
+            }}
+            >
               <Text style={{color:'#ffff'}}>View</Text>
             </TouchableOpacity>
 

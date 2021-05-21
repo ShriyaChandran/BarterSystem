@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-require('@firebase/firestare')
+require('@firebase/firestore')
 
   var firebaseConfig = {
     apiKey: "AIzaSyAKg00HE334_Cdr3UH9RPBzua6VlhwafvM",
