@@ -5,7 +5,7 @@ import {AppTabNavigator} from './AppTabNavigator';
 import DonateScreen from '../screens/DonateScreen';
 import RequestScreen from '../screens/RequestScreen';
 import SettingScreen from '../screens/SettingScreen';
-import MyDonationScreen from '../../BookSantaComplete/screens/MyDonationScreen';
+import MyDonationScreen from '../screens/MyDonationScreen';
 
 export const AppDrawerNavigator = createDrawerNavigator({
     Home:{
@@ -13,6 +13,9 @@ export const AppDrawerNavigator = createDrawerNavigator({
     },
     MyDonations:{
         screen:MyDonationScreen
+    },
+    Notifications:{
+        screen: NotificationScreen
     },
     Setting:{
         screen:SettingScreen

@@ -42,6 +42,19 @@ export default class ReceiverDetailsScreen extends Component{
             })
         }
 
+        getUserDetails = (userId) => {
+            db.collection("users")
+              .where("email_id", "==", userId)
+              .get()
+              .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                  this.setState({
+                    userName: doc.data().first_name + " " + doc.data().last_name,
+                  });
+                });
+              });
+          };
+
     updateItemStatus(){
         db.collection('all_donations').add({
             item_name:this.state.itemName,
@@ -51,6 +64,25 @@ export default class ReceiverDetailsScreen extends Component{
             request_status:"Donor interested"
         })
     }
+
+    addNotification = () => {
+        var message =
+          this.state.userName + " has shown interest in donating the item";
+        db.collection("all_notifications").add({
+          "targeted_user_id": this.state.recieverId,
+          "donor_id": this.state.userId,
+          "request_id": this.state.requestId,
+          "item_name": this.state.itemName,
+          "date": firebase.firestore.FieldValue.serverTimestamp(),
+          "notification_status": "unread",
+          "message": message
+        });
+      };
+
+      componentDidMount() {
+        this.getRecieverDetails();
+        this.getUserDetails(this.state.userId);
+      }
 
     render(){
         return(
@@ -92,8 +124,9 @@ export default class ReceiverDetailsScreen extends Component{
                 </View>
                 {this.state.receiverId!=this.state.userId?
                 (<TouchableOpacity onPress={()=>{
-                    this.updateItemStatus
-                    this.props.navigation.navigate('MyDonation')
+                    this.updateItemStatus()
+                    this.addNotification()
+                    this.props.navigation.navigate('MyDonationScreen')
                 }}>
                     <Text>
                         I want to donate.
