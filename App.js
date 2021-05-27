@@ -3,7 +3,7 @@ import {View, Text, TextInput, StyleSheet} from 'react-native';
 import SignupLoginScreen from './screens/SignupLoginScreen';
 import {AppTabNavigator} from './components/AppTabNavigator';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import { AppDrawerNavigator } from '../BookSantaComplete/components/AppDrawerNavigator';
+import { AppDrawerNavigator } from './components/AppDrawerNavigator';
 
 export default class App extends React.Component{
   render(){

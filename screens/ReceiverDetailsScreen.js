@@ -55,9 +55,51 @@ export default class ReceiverDetailsScreen extends Component{
     render(){
         return(
             <View>
-                <Text>
-                    Receiver Details Screen
-                </Text>
+                <View>
+                    <Card title={'Item information'} titleStyle={{fontSize:20}}>
+
+                    </Card>
+                    <Card>
+                        <Text>
+                            Name:{this.state.itemName}
+                        </Text>
+                    </Card>
+                    <Card>
+                        <Text>
+                        Reason :{this.state.reason_for_requesting}
+                        </Text>
+                    </Card>
+                </View>
+                <View>
+                    <Card title={'Receiver information'} titleStyle={{fontSize:20}}>
+
+                    </Card>
+                    <Card>
+                        <Text>
+                            Name:{this.state.receiverName}
+                        </Text>
+                    </Card>
+                    <Card>
+                        <Text>
+                        Contact :{this.state.receiverContact}
+                        </Text>
+                    </Card>
+                    <Card>
+                        <Text>
+                            Address:{this.state.receiverAddress}
+                        </Text>
+                    </Card>
+                </View>
+                {this.state.receiverId!=this.state.userId?
+                (<TouchableOpacity onPress={()=>{
+                    this.updateItemStatus
+                    this.props.navigation.navigate('MyDonation')
+                }}>
+                    <Text>
+                        I want to donate.
+                    </Text>
+                </TouchableOpacity>)
+                :null}
             </View>
         )
     }

@@ -9,7 +9,7 @@ export default class DonateScreen extends Component{
     super()
     this.state = {
       requestedItemsList : []
-    }
+    };
     this.requestRef= null
   }
     
