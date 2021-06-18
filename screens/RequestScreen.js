@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, TouchableOpacity,TextInput,KeyboardAvoidingView}
 import firebase from 'firebase';
 import db from '../config';
 import {MyHeader} from '../components/MyHeader';
+import { ScrollView } from 'react-native';
 
 export default class  RequestScreen extends React.Component{
     constructor(){
@@ -16,6 +17,53 @@ export default class  RequestScreen extends React.Component{
     createUniqueId(){
         return Math.random().toString(36).substring(7);
     }
+
+    getIsItemRequestActive() {
+        db.collection("users")
+          .where("email_id", "==", this.state.userId)
+          .onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              this.setState({
+                IsItemRequestActive: doc.data().IsItemRequestActive,
+                userDocId: doc.id,
+              });
+            });
+          });
+      }
+
+      sendNotification = () => {
+        //to get the first name and last name
+        db.collection("users")
+          .where("email_id", "==", this.state.userId)
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach((doc) => {
+              var name = doc.data().first_name;
+              var lastName = doc.data().last_name;
+    
+              // to get the donor id and book nam
+              db.collection("all_notifications")
+                .where("request_id", "==", this.state.requestId)
+                .get()
+                .then((snapshot) => {
+                  snapshot.forEach((doc) => {
+                    var donorId = doc.data().donor_id;
+                    var itemName = doc.data().item_name;
+    
+                    //targert user id is the donor id to send notification to the user
+                    db.collection("all_notifications").add({
+                      targeted_user_id: donorId,
+                      message:
+                        name + " " + lastName + " received the item " + itemName,
+                      notification_status: "unread",
+                      item_name: itemName,
+                    });
+                  });
+                });
+            });
+          });
+      };
+
     addRequest=(name,reasonToRequest)=>{
         var userId= this.state.userId;
         var randomRequestId= this.createUniqueId();
@@ -27,38 +75,65 @@ export default class  RequestScreen extends React.Component{
         })
         this.setState({
             name:'',
-            reasonToRequest: ''
+            reasonToRequest: '',
+            itemStatus:'',
         })
         alert("item requested successfully!")
     }
 
     render(){
-        return(
-          <View style={{flex:1}}>
-            {/* <MyHeader title="Request Item" navigation ={this.props.navigation} />*/}
-            <KeyboardAvoidingView style= {styles.keyBoardStyle}>
-                <TextInput 
-                    style={styles.formTextInput} 
-                    placeholder="Enter item name" 
-                    value ={this.state.name}
-                    onChangeText={(text)=>{this.setState({name: text})}}
-                />
-                <TextInput style={[styles.formTextInput, {height:300}]}
-                    placeholder="Why do you want the item?"
-                    multiline
-                    numberOfLines ={8}
-                    value={this.state.reasonToRequest}
-                    onChangeText={(text)=>{this.setState({reasonToRequest: text})}}
-                />
-                <TouchableOpacity style={styles.button} onPress={()=>{
-                    this.addRequest(this.state.name,this.state.reasonToRequest)
-                }}>
-                    <Text> Add request</Text>
-                </TouchableOpacity>
-
-            </KeyboardAvoidingView>
-          </View>
-        )
+        if(this.state.IsItemRequestActive==true){
+            return(
+                <View style={{flex:1, justifyContent:'center'}}>
+                    <View style={{borderColor:'blue', borderWidth:2,justifyContent:'center',alignItems:'center'}}>
+                <Text>Item name</Text>
+                <Text> {this.state.name}</Text>
+                    </View>
+                    <View style={{borderColor:"blue",borderWidth:2, justifyContent:'center',alignItems:'center'}}>
+                        <Text>Item status</Text>
+                        <Text>{this.state.itemStatus}</Text>
+                    </View>
+                    <TouchableOpacity style={{borderWidth:1, borderColor:'blue', backgroundColor:'#ADD8E6'}}>
+                        <Text>
+                            I received the book.
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+              )
+        }
+        else{
+            return(
+                <View style={{flex:1}}>
+                    <MyHeader title="Request Item" navigation={this.props.navigation}/>
+                    <ScrollView>
+                        <KeyboardAvoidingView style={styles.keyBoardStyle}> 
+                            <TextInput 
+                            style={styles.formTextInput}
+                            placeholder={"Enter item name"}
+                            onChangeText={(text)=>{
+                                this.setState({
+                                    name:text
+                                })
+                            }}
+                            value={this.state.name}
+                            />
+                            <TextInput
+                            style={[styles.formTextInput, {height:300}]}
+                            multiline
+                            numberOfLines={8}
+                            placeholder={"Why do you need the item"}
+                            onChangeText={(text)=>{
+                                this.setState({
+                                    reasonToRequest:text
+                                })
+                            }}
+                            />
+                        </KeyboardAvoidingView>
+                    </ScrollView>
+                </View>
+            )
+        }
+        
     }
 }
 const styles = StyleSheet.create({
