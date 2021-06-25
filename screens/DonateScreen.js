@@ -22,7 +22,6 @@ export default class DonateScreen extends Component{
       });
       console.log(this.state.requestedItemsList);
     })
-    
   }
   componentDidMount=()=>{
     this.getRequestedItemsList()

@@ -6,6 +6,7 @@ import DonateScreen from '../screens/DonateScreen';
 import RequestScreen from '../screens/RequestScreen';
 import SettingScreen from '../screens/SettingScreen';
 import MyDonationScreen from '../screens/MyDonationScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 
 export const AppDrawerNavigator = createDrawerNavigator({
     Home:{
