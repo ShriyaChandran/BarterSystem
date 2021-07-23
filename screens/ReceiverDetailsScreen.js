@@ -1,8 +1,9 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {Card, Header, Icon} from 'react-native-elements';
 import firebase from 'firebase'
 import { diffClamp } from 'react-native-reanimated';
+import db from '../config'
 
 export default class ReceiverDetailsScreen extends Component{
     constructor(props){

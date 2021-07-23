@@ -8,11 +8,13 @@ import {
   Platform,
 } from "react-native";
 import { DrawerItems } from "react-navigation-drawer";
-import { Avatar } from "react-native-elements";
+import { Avatar, Icon } from "react-native-elements";
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo=permissions'
+import * as Permissions from 'expo-permissions'
 import firebase from "firebase";
 import db from "../config";
+import {RFValue} from 'react-native-responsive-fontsize'
+
 
 
 export default class CustomSideBarMenu extends React.Component{

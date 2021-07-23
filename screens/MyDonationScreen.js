@@ -53,7 +53,7 @@ export default class MyDonationScreen extends Component{
       };
 
 
-      sendItem = (bookDetails) => {
+      sendItem = (itemDetails) => {
         if (itemDetails.request_status === "Item Sent") {
           var requestStatus = "Donor Interested";
           db.collection("all_donations").doc(itemDetails.doc_id).update({
@@ -163,7 +163,7 @@ export default class MyDonationScreen extends Component{
     }
 }
 
-const Styles= StyleSheet.create({
+const styles= StyleSheet.create({
     button: {
         width: 100,
         height: 30,

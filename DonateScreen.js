@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {MyHeader} from '../components/MyHeader';
+import db from './config';
+import {ListItem} from 'react-native-elements';
 
 export default class  DonateScreen extends Component{
     constructor(){

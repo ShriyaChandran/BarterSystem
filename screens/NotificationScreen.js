@@ -58,15 +58,6 @@ export default class NotificationScreen extends Component{
         );
       };
 
-      render(){
-          return(
-              <View>
-                  <Text>
-                     Notification Screen 
-                  </Text>
-              </View>
-          )
-      }
       
       render() {
         return (
